@@ -31,6 +31,17 @@ export const alpine = () => Alpine.store('dataTable', {
         _this.table =  $('#datatable').DataTable({
                         "processing": true,
                         "serverSide": true,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'excelHtml5',
+                                title: 'Data export'
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                title: 'Data export'
+                            }
+                        ],
                         ajax: {
                             url:  _this.apiUrl,
                             error: function (xhr, error, thrown) {
