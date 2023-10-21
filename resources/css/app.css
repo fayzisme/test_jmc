@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn-primary:hover{
+    color: white !important;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: white !important;
+}
+
+.spinner-border {
+    width: 1rem;
+    height: 1rem;
+}
