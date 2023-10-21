@@ -15,13 +15,9 @@ class PendudukController extends Controller
     {
         $penduduk_total = Penduduk::with('kabupaten.provinsi')->where('name','like', '%'. $request['search'] .'%')->orWhere('nik','like', '%'. $request['search'] .'%')->filter(compact('request'))->count();
 
-        $provinsis = $request['provinsi'] ? Provinsi::with('kabupatens')->where('id', $request['provinsi']) : Provinsi::with('kabupatens');
-        $provinsi_total = $provinsis->count();
-        // $kabupatens = $request['kabupaten'] ? $provinsis->whereHas('kabupatens', function ($kabupaten) use ($request) {
-        //     $kabupaten->where('id', $request['kabupaten']);
-        // })->get() : $provinsis->get();
+        $provinsi_total = $request['provinsi'] ? Provinsi::where('id', $request['provinsi'])->count() : Provinsi::count();
 
-        $kabupaten_total = Kabupaten::count();
+        $kabupaten_total = $request['provinsi'] ? ($request['kabupaten'] ? Kabupaten::where('id', $request['kabupaten'])->count() : Kabupaten::where('provinsi_id', $request['provinsi'])->count()) : Kabupaten::count();
 
         return compact('penduduk_total', 'provinsi_total', 'kabupaten_total');
     }
